@@ -1,0 +1,61 @@
+Arguments: 
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add pkg
+
+PATH: 
+  /usr/lib/jvm/jdk-14.0.2+12//bin:/usr/lib/jvm/jdk-14.0.2+12//bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-14-openjdk-amd64/bin:/snap/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  10.19.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com registry.yarnpkg.com:443
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:56:26)
+
+npm manifest: 
+  {
+    "name": "pro-trator",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start":"node index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jonaslimav/protrator.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/jonaslimav/protrator/issues"
+    },
+    "homepage": "https://github.com/jonaslimav/protrator#readme",
+    "dependencies": {
+      "express": "^4.17.1"
+    },
+    
+     
+      "bin": "index.js",
+      "pkg":{
+          "assets":[
+              "views/*"
+          ],
+          "target": [
+              "node7"
+          ]
+      }
+  
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
