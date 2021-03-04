@@ -79,8 +79,11 @@ function listar() {
     var tblUsers = document.getElementById('tbl_users_list');
     var databaseRef = firebase.database().ref('protocolo/');
     var rowIndex = 1;
-
+    var horasTr=0;
+    var dias=0;
+    var dataAnt;
     databaseRef.orderByChild("date").once('value', function (snapshot) {
+        
         snapshot.forEach(function (childSnapshot) {
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
@@ -108,10 +111,16 @@ function listar() {
             cellTel.appendChild(document.createTextNode(childData.telefone));
             cellImprimir.innerHTML='<input type="button" class="btn btn-danger" value="IMPR." onclick="imprimir(this)"}/>';
 
-           
+           if(dataAnt!=childData.dataAtual){
+               dias++;
+               dataAnt=childData.dataAtual;
+           }
 
             rowIndex = rowIndex + 1;
+            horasTr = horasTr+Number(childData.horas);
         });
+
+        document.getElementById("inf").innerHTML=`<h6>PRODUTORES:&nbsp ${rowIndex-1} &nbsp &nbsp &nbsp QUANT. HORAS:&nbsp ${horasTr} &nbsp &nbsp &nbsp DIAS:&nbsp${dias}&nbsp &nbsp &nbsp VALOR TOTAL&nbsp:${(horasTr*valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h6>`;
     });
     
 }
