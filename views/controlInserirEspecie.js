@@ -98,8 +98,11 @@ function listar() {
             var cellData = row.insertCell(6);
             var cellTel=row.insertCell(7);
             var cellImprimir = row.insertCell(8);
-            if(childData.telefone==undefined){
+            if(childData.telefone==undefined ){
                 childData.telefone="-";
+            }
+            if(childData.rg==undefined ){
+                childData.rg="-";
             }
             cellNome.appendChild(document.createTextNode(childData.nomeProdutor));
             cellCPF.appendChild(document.createTextNode(childData.cpf));
