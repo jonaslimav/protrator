@@ -53,6 +53,7 @@ function InserirProtocolo() {
             horas: horas = document.getElementById("horas").value,
             valorTotal:valorTotal = horas*valor,
             date:new Date()*-1,
+            telefone:telefone =document.getElementById("tel").value,
             
         };
     
@@ -92,7 +93,11 @@ function listar() {
             var cellHoras = row.insertCell(4);
             var cellValor = row.insertCell(5);
             var cellData = row.insertCell(6);
-            var cellImprimir = row.insertCell(7);
+            var cellTel=row.insertCell(7);
+            var cellImprimir = row.insertCell(8);
+            if(childData.telefone==undefined){
+                childData.telefone="-";
+            }
             cellNome.appendChild(document.createTextNode(childData.nomeProdutor));
             cellCPF.appendChild(document.createTextNode(childData.cpf));
             cellLocalidade.appendChild(document.createTextNode(childData.localidade));
@@ -100,6 +105,7 @@ function listar() {
             cellHoras.appendChild(document.createTextNode(childData.horas));
             cellValor.appendChild(document.createTextNode(childData.valorTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})));
             cellData.appendChild(document.createTextNode(childData.dataAtual));
+            cellTel.appendChild(document.createTextNode(childData.telefone));
             cellImprimir.innerHTML='<input type="button" class="btn btn-danger" value="IMPR." onclick="imprimir(this)"}/>';
 
            
