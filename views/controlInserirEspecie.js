@@ -104,11 +104,12 @@ function listar() {
             if(childData.rg==undefined ){
                 childData.rg="-";
             }
+            
             cellNome.appendChild(document.createTextNode(childData.nomeProdutor));
             cellCPF.appendChild(document.createTextNode(childData.cpf));
             cellLocalidade.appendChild(document.createTextNode(childData.localidade));
             cellRG.appendChild(document.createTextNode(childData.rg));
-            cellHoras.appendChild(document.createTextNode(childData.horas));
+            cellHoras.appendChild(document.createTextNode(horasFormat(childData.horas)));
             cellValor.appendChild(document.createTextNode(childData.valorTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})));
             cellData.appendChild(document.createTextNode(childData.dataAtual));
             cellTel.appendChild(document.createTextNode(childData.telefone));
@@ -123,7 +124,7 @@ function listar() {
             horasTr = horasTr+Number(childData.horas);
         });
 
-        document.getElementById("inf").innerHTML=`<h6>PRODUTORES:&nbsp ${rowIndex-1} &nbsp &nbsp &nbsp QUANT. HORAS:&nbsp ${horasTr} &nbsp &nbsp &nbsp DIAS:&nbsp${dias}&nbsp &nbsp &nbsp VALOR TOTAL&nbsp:${(horasTr*valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h6>`;
+        document.getElementById("inf").innerHTML=`<h6>PRODUTORES:&nbsp ${rowIndex-1} &nbsp &nbsp &nbsp QUANT. HORAS:&nbsp ${horasTr.toFixed(2)} &nbsp &nbsp &nbsp DIAS:&nbsp${dias}&nbsp &nbsp &nbsp VALOR TOTAL&nbsp:${(horasTr*valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h6>`;
     });
     
 }
@@ -201,4 +202,16 @@ function printDiv() {
     win.print();
     win.close();//Fecha após a impressão.  
 	
+}
+
+function horasFormat(horas){
+
+  var hora= String(horas).substring(0,1);
+    var minutos= ((Number(horas)-Number(hora))*60).toFixed(0);
+    if(minutos==0){
+        minutos="";
+    }else{
+        minutos=minutos+" Min";
+    }
+    return hora+' Hr '+ minutos;
 }
