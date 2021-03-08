@@ -13,11 +13,20 @@ firebase.initializeApp(firebaseConfig);
 window.onload = listar;
 
 var valor= 67.20;
+function sair(){
 
+    localStorage.clear();
+    window.location.href="PROTRATOR.html";
+}
    
  
 
 function listar() {
+    if(!localStorage.getItem("auth")){
+        alert("Necessario fazer login");
+      window.location.href = "loguin.html";
+
+    }
 
     var tblUsers = document.getElementById('tbl_users_list');
     var databaseRef = firebase.database().ref('protocolo/');

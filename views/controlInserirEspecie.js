@@ -54,7 +54,7 @@ function InserirProtocolo() {
             valorTotal:valorTotal = horas*valor,
             date:new Date()*-1,
             telefone:telefone =document.getElementById("tel").value,
-            atendido:atendido =false
+            
             
         };
     
@@ -99,6 +99,7 @@ function listar() {
             var cellData = row.insertCell(6);
             var cellTel=row.insertCell(7);
             var cellImprimir = row.insertCell(8);
+            
             if(childData.telefone==undefined ){
                 childData.telefone="-";
             }
@@ -215,4 +216,9 @@ function horasFormat(horas){
         minutos=minutos+" Min";
     }
     return hora+' Hr '+ minutos;
+}
+function sair(){
+
+    localStorage.clear();
+    window.location.href="PROTRATOR.html";
 }
