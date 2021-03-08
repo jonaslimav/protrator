@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pro Trator</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/stylleee.css">
+
+</head>
+
+<body style="background-color: #F2f2f2;">
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+    <script src="controlListaEsp.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"> PRO. TRATOR</a>
+        <div class="container">
+          <div class="col center">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+             
+                <a class="btn btn-danger" href="PROTRATOR.html">INICIO</a>
+            </div>
+           </div>
+          </div>
+          <div class="navbar-nav">
+            <a class="navbar" href="EXECULTADOS.html">   ATENDIDOS   </a>
+
+          </div>
+          <div class="navbar-nav">
+            <a class="navbar" href="LISTAESPERA.html">   EMITIDOS   </a>             
+
+          </div>
+          <div class="navbar-nav">
+            <a class="navbar" href="PAGOS.html">   PAGOS   </a>             
+
+          </div>
+          <div class="navbar-nav">
+            <a class="navbar" href="PGTRATOR.html">   PG TRATOR   </a>             
+
+          </div>
+          
+        </div>
+      </nav>
+
+
+
+        <div id="inf"></div>
+
+        <table class="table table-striped" style="margin-top: 20px;" id="tbl_users_list" ,border="3">
+            <tr>
+                <td scope="col">PRODUTOR</td>
+                <td scope="col">CPF</td>
+                <td scope="col">LOCALIDADE</td>
+                <td scope="col">RG</td>
+                <td scope="col">HORAS</td>
+                <td scope="col">VALOR TOTAL</td>
+                <td scope="col">DATA</td>
+                <td scope="col"> TELEFONE</td>
+                <td scope="col">PAGO</td>
+               
+                
+            </tr>
+        </table>
+    </div>
+	
+    
+
+</body>
+
+</html>

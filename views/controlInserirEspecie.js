@@ -54,6 +54,7 @@ function InserirProtocolo() {
             valorTotal:valorTotal = horas*valor,
             date:new Date()*-1,
             telefone:telefone =document.getElementById("tel").value,
+            atendido:atendido =false
             
         };
     
