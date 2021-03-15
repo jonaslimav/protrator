@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pro Trator</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/stylleee.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/stylleee.css">
 
 </head>
 
@@ -54,7 +54,66 @@
       
     </div>
       </nav>
+	  
+	   <div id= "geral" style="margin-top: 20px;">
+        <h3>CADASTRO TRATOR</h3>
+        <form  class="container col-12" action="javascript:InserirTrator();">
+            <form class="form-row">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control" placeholder="Nome" type="text "id="trator" required><br>
+                    </div>
+                   
+                    
+                    
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control" placeholder="Localidade" type="text" id="localidade" required><br>
+                     
+                    </div>
+                    
+                    <div class="col">
+                        <input class="form-control" placeholder="Valor / hora" type="text" maxlength="11" id="horaV" required><br>
 
+                    </div>
+                    <div class="col">
+                        <input class="form-control" placeholder="TELEFONE" type="tel" maxlength="11" id="tel" ><br>
+
+                    </div>
+                </div>
+
+                
+                <input type="submit" class="btn btn-primary">
+        </form >
+ <div id= "geral" style="margin-top: 20px;">
+        <h3>
+            PAGAMENTO
+        </h3>
+        <form  class="container col-12" action="javascript:InserirPagamento();">
+            <form class="form-row">
+                <div class="row">
+                    
+                    
+                    <div class="col">
+                        <select class="custom-select" id="Tratores">
+                          
+                            
+
+                        </select><br>
+                    </div>
+               
+             
+                    <div class="col">
+                        <input class="form-control" placeholder="Valor Pago" type="text" id="valor" required><br>
+                     
+                    </div>
+                  
+                </div>
+
+                
+                <input type="submit" class="btn btn-primary">
+        </form >
 
 
     <div id= "geralAt" style="margin-top: 20px;">
@@ -65,14 +124,14 @@
 
         <table class="table table-striped" style="margin-top: 20px;" id="tbl_users_list" ,border="3">
             <tr>
-                <td scope="col">PRODUTOR</td>
-                <td scope="col">CPF</td>
+                <td scope="col">TRATOR</td>
+                <td scope="col">HORAS EXECUTADAS</td>
+                <td scope="col">HORAS PAGAS</td>
+                <td scope="col">VALOR PAGO</td>
+                <td scope="col">VALOR RESTANTE</td>
                 <td scope="col">LOCALIDADE</td>
-                <td scope="col">RG</td>
-                <td scope="col">HORAS</td>
-                <td scope="col">VALOR TOTAL</td>
-                <td scope="col">DATA</td>
-                <td scope="col"> TELEFONE</td>
+                <td scope="col">DT ULT. PAG</td>
+                <td scope="col">TELEFONE</td>
                 
                
                 

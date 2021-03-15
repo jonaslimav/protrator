@@ -27,19 +27,26 @@ function listar() {
       window.location.href = "loguin.html";
 
     }
+		var x =document.getElementById('Tratores');
+
 
     var tblUsers = document.getElementById('tbl_users_list');
     var databaseRef = firebase.database().ref('protocolo/');
+	    var databaseRefE= firebase.database().ref('tratores/');
+
     var rowIndex = 1;
     var horasTr=0;
     var dias=0;
     var dataAnt;
+	
+		
+			
     databaseRef.orderByChild("date").once('value', function (snapshot) {
         
         snapshot.forEach(function (childSnapshot) {
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
-            if(childData.status==2){
+            if(childData.status>1&&childData.status<5){
                 var row = tblUsers.insertRow(rowIndex);
             var cellNome = row.insertCell(0);
             var cellCPF = row.insertCell(1);
@@ -79,7 +86,14 @@ function listar() {
 
         document.getElementById("inf").innerHTML=`<h6>PRODUTORES:&nbsp ${rowIndex-1} &nbsp &nbsp &nbsp HORAS :&nbsp ${horasTr.toFixed(2)} &nbsp &nbsp &nbsp DIAS:&nbsp${dias}&nbsp &nbsp &nbsp VALOR TOTAL &nbsp:${(horasTr*valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h6>`;
     });
-    
+     databaseRefE.once('value', function (snapshot) {
+        
+        snapshot.forEach(function (childSnapshot) {
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+			x.insertAdjacentHTML("beforeend",`<option id=${childKey} value=${childKey}>${childData.trator}</option>`);
+		});
+		});
 }
 
 
@@ -145,18 +159,61 @@ function execultar(dt){
                     valorTotal:valorTotal = proto.valorTotal,
                     date:proto.date,
                     telefone:telefone =proto.telefone?proto.telefone:"",
-                    status:status =3
+                    status:status =6
                     
                 };
                 
                 let updates = {}
       updates["/protocolo/" + key] = protocolo;;
       firebase.database().ref().update(updates);
-      window.location.reload();
+
+
+
+      var databaseRef = firebase.database().ref('tratores/');
+
+  
+      let tratores_id = document.getElementById("Tratores").value;
+      databaseRef.once('value', function (snapshot) {
+            
+        var tratores;
+        snapshot.forEach(function (childSnapshot) {
+            var childData = childSnapshot.val();
+                
+            if(childSnapshot.key==tratores_id){
+             
+                tratores=childData;
+
+           
+            }
+        });
+
+
+        tratores.horasExec=Number(tratores.horasExec)+Number(proto.horas);
+       tratores.valorExec=Number(tratores.horasExec)*Number(tratores.horas);
+        
+   
+
+   
+    let updates = {}
+    updates["/tratores/" + tratores_id] = tratores;
+    let tratores_ref = firebase.database().ref();
+    firebase.database().ref().update(updates);
+    window.location.reload();
+    
       
             });
+        });
+			
+			
+			
+			
+			
+
+
+        
+       
     
     
     
-            }
-    
+        
+        }

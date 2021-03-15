@@ -22,21 +22,22 @@ function InserirProtocolo() {
 //console.log(consultarCPF(cpf));
     var i=0;
    var databaseRef = firebase.database().ref('protocolo/');
-
+    var horasT;
    databaseRef.orderByChild("date").once('value', function (snapshot) {
        snapshot.forEach(function (childSnapshot) {
            var childData = childSnapshot.val();
                
            if(childData.cpf===cpf){
+               horasT= horas+Number(childData.horas);
             i++;
           
            }
        });
+       horasT = horasT + Number(document.getElementById("horas").value);
 
+       if(horasT>=5){
 
-       if(i>0){
-
-        alert("CPF existente na base de dados!!! ");
+        alert(`CPF existente na base de dados e Horas ultrapassam o Limite: ${horasFormat(horasT)}!!! `);
        }else{
 
         let protocolo_id = false;

@@ -19,7 +19,49 @@ function sair(){
     window.location.href="PROTRATOR.html";
 }
    
- 
+ function InserirTrator() {
+    var data= dataAtualFormatada();
+
+
+//console.log(consultarCPF(cpf));
+    var i=0;
+   var databaseRef = firebase.database().ref('tratores/');
+
+  
+        let tratores_id = false;
+
+
+        const tratores = {
+    
+            
+            trator: trator = document.getElementById("trator").value.toUpperCase(),
+            localidade: localidade = document.getElementById ("localidade").value.toUpperCase(),
+            horas: horas = document.getElementById("horaV").value,
+			dataUlt: dataUlt = "",
+			horasExec: horasExec =0,
+			horasPagas:horasPagas=0,
+			valorExec: valorExec=0.0,
+			valorPago: valorPago= 0.0,
+            telefone:telefone =document.getElementById("tel").value,
+            
+            
+        };
+    
+        if (!tratores_id) {
+            tratores_id = firebase.database().ref().child('tratores').push().key;
+        }
+        let updates = {}
+        updates["/tratores/" + tratores_id] = tratores;
+        let tratores_ref = firebase.database().ref();
+        firebase.database().ref().update(updates);
+        window.location.reload();
+       
+    
+   
+  
+  
+    
+}
 
 function listar() {
     if(!localStorage.getItem("auth")){
@@ -29,43 +71,53 @@ function listar() {
     }
 
     var tblUsers = document.getElementById('tbl_users_list');
-    var databaseRef = firebase.database().ref('protocolo/');
+	var x =document.getElementById('Tratores');
+    var databaseRef = firebase.database().ref('tratores/');
     var rowIndex = 1;
-    var horasTr=0;
-    var dias=0;
+   
     var dataAnt;
-    databaseRef.orderByChild("date").once('value', function (snapshot) {
+	
+	
+	 databaseRef.orderByChild("date").once('value', function (snapshot) {
         
         snapshot.forEach(function (childSnapshot) {
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
-            if(childData.status==4){
+			x.insertAdjacentHTML("beforeend",`<option id=${childKey} value=${childData.trator}>${childData.trator}</option>`);
+			
+		});
+	 });
+	 
+    databaseRef.once('value', function (snapshot) {
+        
+        snapshot.forEach(function (childSnapshot) {
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+			
+			
                 var row = tblUsers.insertRow(rowIndex);
             var cellNome = row.insertCell(0);
-            var cellCPF = row.insertCell(1);
-            var cellLocalidade = row.insertCell(2);
-            var cellRG = row.insertCell(3);            
-            var cellHoras = row.insertCell(4);
-            var cellValor = row.insertCell(5);
+            var cellHorasExe = row.insertCell(1);
+            var cellHorasPagas = row.insertCell(2);
+            var cellValorPago = row.insertCell(3);            
+            var cellValorRest = row.insertCell(4);
+            var cellLocalidade = row.insertCell(5);
             var cellData = row.insertCell(6);
             var cellTel=row.insertCell(7);
-            if(childData.telefone==undefined ){
-                childData.telefone="-";
-            }
-            if(childData.rg==undefined ){
-                childData.rg="-";
-            }
-            cellNome.appendChild(document.createTextNode(childData.nomeProdutor));
-            cellCPF.appendChild(document.createTextNode(childData.cpf));
-            cellLocalidade.appendChild(document.createTextNode(childData.localidade));
-            cellRG.appendChild(document.createTextNode(childData.rg));
-            cellHoras.appendChild(document.createTextNode(horasFormat(childData.horas)));
-            cellValor.appendChild(document.createTextNode(childData.valorTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})));
-            cellData.appendChild(document.createTextNode(childData.dataAtual));
+           var valorrest=Number(childData.valorExec)-Number(childData.valorPago);
+            
+            cellNome.appendChild(document.createTextNode(childData.trator));
+            cellHorasExe.appendChild(document.createTextNode(childData.horasExec));
+            cellHorasPagas.appendChild(document.createTextNode(childData.horasPagas));
+            cellValorPago.appendChild(document.createTextNode(Number(childData.valorPago).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})));
+            cellValorRest.appendChild(document.createTextNode(valorrest.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})));
+			cellLocalidade.appendChild(document.createTextNode(childData.localidade));
+            cellData.appendChild(document.createTextNode(childData.dataUlt));
             cellTel.appendChild(document.createTextNode(childData.telefone));
             rowIndex = rowIndex + 1;
-            horasTr = horasTr+Number(childData.horas);
-            }
+			
+			
+            
             
            
             
@@ -74,7 +126,7 @@ function listar() {
             
         });
 
-        document.getElementById("inf").innerHTML=`<h6>PRODUTORES:&nbsp ${rowIndex-1} &nbsp &nbsp &nbsp HORAS ATENDIDAS:&nbsp ${horasTr.toFixed(2)} &nbsp &nbsp &nbsp DIAS:&nbsp${dias}&nbsp &nbsp &nbsp VALOR TOTAL ATENDIDO&nbsp:${(horasTr*valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h6>`;
+      //  document.getElementById("inf").innerHTML=`<h6>PRODUTORES:&nbsp ${rowIndex-1} &nbsp &nbsp &nbsp HORAS ATENDIDAS:&nbsp ${horasTr.toFixed(2)} &nbsp &nbsp &nbsp DIAS:&nbsp${dias}&nbsp &nbsp &nbsp VALOR TOTAL ATENDIDO&nbsp:${(horasTr*valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h6>`;
     });
     
 }
@@ -102,4 +154,44 @@ function horasFormat(horas){
         minutos=minutos+" Min";
     }
     return hora+' Hr '+ minutos;
+}
+
+
+function inserirPagamento(){
+    var databaseRef = firebase.database().ref('tratores/');
+
+  
+    let tratores_id = document.getElementById("Tratores").value;
+    databaseRef.once('value', function (snapshot) {
+          
+      var tratores;
+      snapshot.forEach(function (childSnapshot) {
+          var childData = childSnapshot.val();
+              
+          if(childSnapshot.key==tratores_id){
+           
+              tratores=childData;
+
+         
+          }
+      });
+var valor = document.getElementById("valor").value;
+
+tratores.horasPagas = Number(tratores.horasPagas)+(Number(valor)/Number(tratores.horas));
+tratores.dataUlt=dataAtualFormatada();
+tratores.valorPago = Number(tratores.valorPago)+Number(valor);      
+ 
+
+ 
+  let updates = {}
+  updates["/tratores/" + tratores_id] = tratores;
+  let tratores_ref = firebase.database().ref();
+  firebase.database().ref().update(updates);
+  window.location.reload();
+  
+    
+          
+      });
+          
+
 }
