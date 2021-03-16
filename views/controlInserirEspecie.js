@@ -35,7 +35,7 @@ function InserirProtocolo() {
        });
        horasT = horasT + Number(document.getElementById("horas").value);
 
-       if(horasT>=5){
+       if(horasT>5){
 
         alert(`CPF existente na base de dados e Horas ultrapassam o Limite: ${horasFormat(horasT)}!!! `);
        }else{
