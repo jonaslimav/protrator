@@ -78,6 +78,12 @@ function InserirProtocolo() {
 
 function listar() {
 
+	
+	 if ( ! localStorage . getItem ( "auth" ) ) {
+        alert ( "Necessario fazer login" ) ;
+      janela . localização . href  =  "loguin.html" ;
+
+    }
     var tblUsers = document.getElementById('tbl_users_list');
     var databaseRef = firebase.database().ref('protocolo/');
     var rowIndex = 1;
